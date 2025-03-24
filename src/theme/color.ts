@@ -1,0 +1,8 @@
+export const COLOR = {
+  WHITE: '#FFFFFF',
+  BLACK: '#000000',
+  GREY: '#C9C9C9',
+  SUCCESS: '#50B785',
+  WARNING: '#F86642',
+  BACKGROUND: '#F4FAF8',
+};
