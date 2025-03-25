@@ -6,6 +6,7 @@ import { styles } from './styles';
 import { useGetTransactions } from '../../services/query/transaction/useGetTransactions';
 import { TransactionCard } from '../../components/TransactionCard/TransactionCard';
 import { COLOR } from '../../theme/color';
+import { formatCurrency, formatDate } from '../../utils/helpers';
 
 export const TransactionList: FC<Props> = () => {
   const {
@@ -42,8 +43,8 @@ export const TransactionList: FC<Props> = () => {
           beneficiaryBank={item.beneficiary_bank}
           senderBank={item.sender_bank}
           beneficiaryName={item.beneficiary_name}
-          amount={String(item.amount)}
-          date={item.completed_at}
+          amount={formatCurrency(item.amount)}
+          date={formatDate(item.completed_at)}
           status={item.status}
           onPress={() => {}}
         />
