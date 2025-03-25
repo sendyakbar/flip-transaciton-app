@@ -4,10 +4,7 @@ import { Text } from '../Text/Text';
 import { TransactionStatus } from '../../services/model/transaction/types';
 import { styles } from './styles';
 import { COLOR } from '../../theme/color';
-
-type Props = {
-  status: TransactionStatus;
-};
+import { Props } from './types';
 
 export const Label = memo(forwardRef<View, Props>(
   (props, ref) => {
