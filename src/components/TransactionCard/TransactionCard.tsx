@@ -30,7 +30,8 @@ export const TransactionCard = memo(forwardRef<View, Props>(
         <View
           style={[
             styles.ornament,
-            { backgroundColor:
+            {
+              backgroundColor:
                 status === TransactionStatus.SUCCESS
                   ? COLOR.SUCCESS
                   : COLOR.WARNING,
@@ -38,7 +39,7 @@ export const TransactionCard = memo(forwardRef<View, Props>(
           ]}
         />
         <View style={styles.inner}>
-          <View>
+          <View style={styles.leftCol}>
             <Destination sender={senderBank} destination={beneficiaryBank} />
             <Text size={16} weight="500">{beneficiaryName.toUpperCase()}</Text>
             <Text size={16} weight="500">{amount} &bull; {date}</Text>

@@ -20,4 +20,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
   },
+  leftCol: {
+    flex: 1,
+  },
 });
