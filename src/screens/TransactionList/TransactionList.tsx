@@ -9,6 +9,7 @@ import { COLOR } from '../../theme/color';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 import { Text } from '../../components/Text/Text';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const TransactionList: FC<Props> = () => {
   const {
@@ -17,7 +18,6 @@ export const TransactionList: FC<Props> = () => {
     refetch,
   } = useGetTransactions({});
   const [refreshing, setRefreshing] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const [processedData, setProcessedData] = useState<typeof data>(data);
 
   const onRefresh = useCallback(async () => {
@@ -29,7 +29,7 @@ export const TransactionList: FC<Props> = () => {
   const runSearch = useCallback((input: string) => {
     const lowerCaseQuery = input.toLowerCase();
     setProcessedData(() => {
-      if (!searchQuery) {
+      if (!input) {
         return data;
       }
       return data.filter(transaction => {
@@ -41,12 +41,9 @@ export const TransactionList: FC<Props> = () => {
         );
       });
     });
-  }, [data, searchQuery]);
+  }, [data]);
 
-  const onChangeText = useCallback((input: string) => {
-    setSearchQuery(input);
-    runSearch(input);
-  }, [runSearch]);
+  const { query, setQuery } = useDebounce(runSearch);
 
   const renderEmpty = useCallback(() => (
     <View style={styles.loading}>
@@ -70,8 +67,8 @@ export const TransactionList: FC<Props> = () => {
     <View style={styles.wrapper}>
       <SearchBar
         onPressSort={() => {}}
-        onChangeText={onChangeText}
-        value={searchQuery}
+        onChangeText={setQuery}
+        value={query}
       />
       <FlatList
         style={styles.container}
