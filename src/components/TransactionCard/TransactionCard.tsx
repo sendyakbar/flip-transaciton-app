@@ -40,7 +40,7 @@ export const TransactionCard = memo(forwardRef<View, Props>(
         <View style={styles.inner}>
           <View>
             <Destination sender={senderBank} destination={beneficiaryBank} />
-            <Text size={16} weight="500">{beneficiaryName}</Text>
+            <Text size={16} weight="500">{beneficiaryName.toUpperCase()}</Text>
             <Text size={16} weight="500">{amount} &bull; {date}</Text>
           </View>
           <Label status={status} />

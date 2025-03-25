@@ -10,13 +10,13 @@ export const Destination = memo(forwardRef<View, Props>(
 
     return (
       <View style={styles.container} ref={ref}>
-        <Text weight="bold" size={18}>{sender}</Text>
+        <Text weight="bold" size={18}>{sender.toUpperCase()}</Text>
         <Image
           source={require('../../assets/icons/icon_arrow_right.jpeg')}
           style={styles.icon}
           resizeMode="contain"
         />
-        <Text weight="bold" size={18}>{destination}</Text>
+        <Text weight="bold" size={18}>{destination.toUpperCase()}</Text>
       </View>
     );
   }
