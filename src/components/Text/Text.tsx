@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode } from 'react';
+import { forwardRef, memo, ReactNode } from 'react';
 import {
   Text as RNText,
   TextProps as RNTextProps,
@@ -14,7 +14,7 @@ interface Props extends RNTextProps {
   style?: TextStyle;
 }
 
-export const Text = forwardRef<RNText, Props>(
+export const Text = memo(forwardRef<RNText, Props>(
   (props, ref) => {
     const {
       children,
@@ -42,4 +42,4 @@ export const Text = forwardRef<RNText, Props>(
       </RNText>
     );
   }
-);
+));
