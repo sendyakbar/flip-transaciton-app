@@ -17,12 +17,36 @@ export const TransactionList: FC<Props> = () => {
     refetch,
   } = useGetTransactions({});
   const [refreshing, setRefreshing] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [processedData, setProcessedData] = useState<typeof data>(data);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     await refetch();
     setRefreshing(false);
   }, [refetch]);
+
+  const runSearch = useCallback((input: string) => {
+    const lowerCaseQuery = input.toLowerCase();
+    setProcessedData(() => {
+      if (!searchQuery) {
+        return data;
+      }
+      return data.filter(transaction => {
+        return (
+          transaction.beneficiary_name.toLowerCase().includes(lowerCaseQuery) ||
+          transaction.beneficiary_bank.toLowerCase().includes(lowerCaseQuery) ||
+          transaction.sender_bank.toLowerCase().includes(lowerCaseQuery) ||
+          transaction.amount.toString().includes(lowerCaseQuery)
+        );
+      });
+    });
+  }, [data, searchQuery]);
+
+  const onChangeText = useCallback((input: string) => {
+    setSearchQuery(input);
+    runSearch(input);
+  }, [runSearch]);
 
   const renderEmpty = useCallback(() => (
     <View style={styles.loading}>
@@ -46,12 +70,13 @@ export const TransactionList: FC<Props> = () => {
     <View style={styles.wrapper}>
       <SearchBar
         onPressSort={() => {}}
-        onChangeText={() => {}}
+        onChangeText={onChangeText}
+        value={searchQuery}
       />
       <FlatList
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
-        data={data}
+        data={processedData}
         renderItem={({ item }) => (
           <TransactionCard
             beneficiaryBank={item.beneficiary_bank}
