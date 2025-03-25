@@ -8,7 +8,7 @@ import { TransactionDetail } from '../screens/TransactionDetail/TransactionDetai
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{headerShown: false}}>
     <Stack.Screen
       name="TransactionList"
       component={TransactionList}
