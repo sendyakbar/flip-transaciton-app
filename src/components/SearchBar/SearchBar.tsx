@@ -7,7 +7,7 @@ import { COLOR } from '../../theme/color';
 
 export const SearchBar = memo(forwardRef<View, Props>(
   (props, ref) => {
-    const {onChangeText, onPressSort} = props;
+    const {onChangeText, onPressSort, value} = props;
 
     return (
       <View style={styles.container} ref={ref}>
@@ -21,6 +21,7 @@ export const SearchBar = memo(forwardRef<View, Props>(
             placeholder="Cari nama, bank, atau nominal"
             onChangeText={onChangeText}
             style={styles.input}
+            value={value}
           />
         </View>
         <TouchableOpacity
