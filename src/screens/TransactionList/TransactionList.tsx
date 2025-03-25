@@ -16,7 +16,7 @@ export const TransactionList: FC<Props> = () => {
     data,
     isLoading,
     refetch,
-  } = useGetTransactions({});
+  } = useGetTransactions();
   const [refreshing, setRefreshing] = useState(false);
   const [processedData, setProcessedData] = useState<typeof data>(data);
 

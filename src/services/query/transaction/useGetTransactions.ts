@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Params } from './types';
 import { getTransactions } from '../../model/transaction/api';
 
-export const useGetTransactions = ({ options }: Params) => {
+export const useGetTransactions = (options?: Params) => {
   const query = useQuery({
     queryKey: ['transactions'],
     queryFn: getTransactions,
