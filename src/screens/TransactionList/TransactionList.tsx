@@ -7,6 +7,7 @@ import { useGetTransactions } from '../../services/query/transaction/useGetTrans
 import { TransactionCard } from '../../components/TransactionCard/TransactionCard';
 import { COLOR } from '../../theme/color';
 import { formatCurrency, formatDate } from '../../utils/helpers';
+import { Text } from '../../components/Text/Text';
 
 export const TransactionList: FC<Props> = () => {
   const {
@@ -21,6 +22,12 @@ export const TransactionList: FC<Props> = () => {
     await refetch();
     setRefreshing(false);
   }, [refetch]);
+
+  const renderEmpty = useCallback(() => (
+    <View style={styles.loading}>
+      <Text color={COLOR.GREY} size={16}>No data</Text>
+    </View>
+  ), []);
 
   const separator = useCallback(() => (
     <View style={styles.separator} />
@@ -51,6 +58,7 @@ export const TransactionList: FC<Props> = () => {
       )}
       keyExtractor={(_) => _.id}
       ItemSeparatorComponent={separator}
+      ListEmptyComponent={renderEmpty}
       onRefresh={onRefresh}
       refreshing={refreshing}
     />
