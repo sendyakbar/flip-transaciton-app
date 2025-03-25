@@ -8,6 +8,7 @@ import { TransactionCard } from '../../components/TransactionCard/TransactionCar
 import { COLOR } from '../../theme/color';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 import { Text } from '../../components/Text/Text';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
 
 export const TransactionList: FC<Props> = () => {
   const {
@@ -42,25 +43,32 @@ export const TransactionList: FC<Props> = () => {
   }
 
   return (
-    <FlatList
-      contentContainerStyle={styles.container}
-      data={data}
-      renderItem={({ item }) => (
-        <TransactionCard
-          beneficiaryBank={item.beneficiary_bank}
-          senderBank={item.sender_bank}
-          beneficiaryName={item.beneficiary_name}
-          amount={formatCurrency(item.amount)}
-          date={formatDate(item.completed_at)}
-          status={item.status}
-          onPress={() => {}}
-        />
-      )}
-      keyExtractor={(_) => _.id}
-      ItemSeparatorComponent={separator}
-      ListEmptyComponent={renderEmpty}
-      onRefresh={onRefresh}
-      refreshing={refreshing}
-    />
+    <View style={styles.wrapper}>
+      <SearchBar
+        onPressSort={() => {}}
+        onChangeText={() => {}}
+      />
+      <FlatList
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        data={data}
+        renderItem={({ item }) => (
+          <TransactionCard
+            beneficiaryBank={item.beneficiary_bank}
+            senderBank={item.sender_bank}
+            beneficiaryName={item.beneficiary_name}
+            amount={formatCurrency(item.amount)}
+            date={formatDate(item.completed_at)}
+            status={item.status}
+            onPress={() => {}}
+          />
+        )}
+        keyExtractor={(_) => _.id}
+        ItemSeparatorComponent={separator}
+        ListEmptyComponent={renderEmpty}
+        onRefresh={onRefresh}
+        refreshing={refreshing}
+      />
+    </View>
   );
 };

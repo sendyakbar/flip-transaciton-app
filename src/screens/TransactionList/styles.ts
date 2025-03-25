@@ -2,10 +2,15 @@ import { StyleSheet } from 'react-native';
 import { COLOR } from '../../theme/color';
 
 export const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
+  wrapper: {
     backgroundColor: COLOR.BACKGROUND,
     paddingHorizontal: 8,
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
     paddingVertical: 16,
   },
   separator: {
