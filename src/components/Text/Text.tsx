@@ -1,18 +1,7 @@
-import { forwardRef, memo, ReactNode } from 'react';
-import {
-  Text as RNText,
-  TextProps as RNTextProps,
-  TextStyle,
-} from 'react-native';
+import { forwardRef, memo } from 'react';
+import { Text as RNText } from 'react-native';
 import { COLOR } from '../../theme/color';
-
-interface Props extends RNTextProps {
-  children: ReactNode;
-  size?: TextStyle['fontSize'];
-  weight?: TextStyle['fontWeight'];
-  color?: TextStyle['color'],
-  style?: TextStyle;
-}
+import { Props } from './types';
 
 export const Text = memo(forwardRef<RNText, Props>(
   (props, ref) => {
