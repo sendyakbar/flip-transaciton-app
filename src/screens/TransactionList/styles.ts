@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
+    flexGrow: 1,
     paddingVertical: 16,
   },
   separator: {

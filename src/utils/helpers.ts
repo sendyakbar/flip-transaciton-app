@@ -36,3 +36,7 @@ export const formatDate = (dateString: string) => {
 
   return `${day} ${month} ${year}`;
 };
+
+export const dateParser = (date: string) => {
+  return new Date(date);
+};
