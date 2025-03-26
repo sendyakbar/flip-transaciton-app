@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useState } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { PopupModal } from '../PopupModal/PopupModal';
 import { Props } from './types';
 import { Image, TouchableOpacity, View } from 'react-native';
@@ -15,13 +15,9 @@ const filterData = [
 ];
 
 export const Filter: FC<Props> = memo((props) => {
-  const {visible, onSelectFilter} = props;
-  const [selectedFilter, setSelectedFilter] = useState(FILTER.ORDER);
-
-  console.log('modal rendered!!!');
+  const {visible, selectedFilter, onSelectFilter} = props;
 
   const onPressFilter = useCallback((item: string) => {
-    setSelectedFilter(item);
     onSelectFilter(item);
   }, [onSelectFilter]);
 

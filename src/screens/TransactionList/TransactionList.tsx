@@ -21,7 +21,7 @@ export const TransactionList: FC<Props> = () => {
   } = useGetTransactions();
   const [refreshing, setRefreshing] = useState(false);
   const [processedData, setProcessedData] = useState<typeof data>(data);
-  const [sortTitle, setSortTitle] = useState(FILTER.ORDER);
+  const [selectedFilter, setSelectedFilter] = useState(FILTER.ORDER);
   const [filterVisible, setFilterVisible] = useState(false);
 
   const onRefresh = useCallback(async () => {
@@ -30,8 +30,8 @@ export const TransactionList: FC<Props> = () => {
     setRefreshing(false);
   }, [refetch]);
 
-  const onSelectFilter = useCallback((filter: string) => {
-    setSortTitle(filter);
+  const onSelectFilter = (filter: string) => {
+    setSelectedFilter(filter);
     setFilterVisible(false);
     setProcessedData(() => {
       switch (filter) {
@@ -57,7 +57,7 @@ export const TransactionList: FC<Props> = () => {
           return data;
       }
     });
-  }, [data, processedData]);
+  };
 
   const runSearch = useCallback((input: string) => {
     const lowerCaseQuery = input.toLowerCase();
@@ -131,15 +131,19 @@ export const TransactionList: FC<Props> = () => {
   return (
     <View style={styles.wrapper}>
       <SearchBar
-        sortTitle={sortTitle}
+        sortTitle={selectedFilter}
         onPressSort={() => { setFilterVisible(true); }}
         onChangeText={setQuery}
         value={query}
       />
       {listData}
-      <Filter
-        visible={filterVisible}
-        onSelectFilter={onSelectFilter} />
+      {filterVisible ? (
+        <Filter
+          selectedFilter={selectedFilter}
+          visible={filterVisible}
+          onSelectFilter={onSelectFilter}
+        />
+      ) : null}
     </View>
   );
 };
