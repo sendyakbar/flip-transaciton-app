@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 
 import { Props } from './types';
@@ -55,21 +55,8 @@ export const TransactionList: FC<Props> = () => {
     <View style={styles.separator} />
   ), []);
 
-  if (isLoading) {
+  const listData = useMemo(() => {
     return (
-      <View style={styles.loading}>
-        <ActivityIndicator color={COLOR.SUCCESS} size="large" />
-      </View>
-    );
-  }
-
-  return (
-    <View style={styles.wrapper}>
-      <SearchBar
-        onPressSort={() => {}}
-        onChangeText={setQuery}
-        value={query}
-      />
       <FlatList
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
@@ -91,6 +78,31 @@ export const TransactionList: FC<Props> = () => {
         onRefresh={onRefresh}
         refreshing={refreshing}
       />
+    );
+  }, [
+    processedData,
+    refreshing,
+    onRefresh,
+    renderEmpty,
+    separator,
+  ]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator color={COLOR.SUCCESS} size="large" />
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.wrapper}>
+      <SearchBar
+        onPressSort={() => {}}
+        onChangeText={setQuery}
+        value={query}
+      />
+      {listData}
     </View>
   );
 };
