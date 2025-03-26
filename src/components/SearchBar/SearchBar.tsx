@@ -7,7 +7,12 @@ import { COLOR } from '../../theme/color';
 
 export const SearchBar = memo(forwardRef<View, Props>(
   (props, ref) => {
-    const {onChangeText, onPressSort, value} = props;
+    const {
+      onChangeText,
+      onPressSort,
+      value,
+      sortTitle,
+    } = props;
 
     return (
       <View style={styles.container} ref={ref}>
@@ -30,7 +35,7 @@ export const SearchBar = memo(forwardRef<View, Props>(
           style={styles.sortButton}
         >
           <Text size={16} weight="600" color={COLOR.WARNING}>
-            URUTKAN
+            {sortTitle}
           </Text>
           <Image
             source={require('../../assets/icons/icon_chevron_down.jpeg')}
