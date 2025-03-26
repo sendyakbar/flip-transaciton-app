@@ -13,7 +13,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { Filter } from '../../components/Filter/Filter';
 import { FILTER } from '../../utils/constants';
 
-export const TransactionList: FC<Props> = () => {
+export const TransactionList: FC<Props> = ({ navigation }) => {
   const {
     data,
     isLoading,
@@ -102,7 +102,9 @@ export const TransactionList: FC<Props> = () => {
             amount={formatCurrency(item.amount)}
             date={formatDate(item.created_at)}
             status={item.status}
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate('TransactionDetail', item);
+            }}
           />
         )}
         keyExtractor={(_) => _.id}
@@ -115,6 +117,7 @@ export const TransactionList: FC<Props> = () => {
   }, [
     processedData,
     refreshing,
+    navigation,
     onRefresh,
     renderEmpty,
     separator,
